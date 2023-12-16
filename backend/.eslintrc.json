@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "globals": {
+        "afterEach": true,
+        "afterAll": true,
+        "beforeEach": true,
+        "Buffer": true,
+        "describe": true,
+        "jest": true,
+        "jestExpect": true,
+        "it": true,
+        "itOnlyInV2": true,
+        "test": true,
+        "expect": true,
+        "process": true,
+        "__dirname": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": ["eslint-plugin-local-rules"],
+    "rules": {
+        "local-rules/logger-no-single-argument": "warn",
+        "no-console": "off",
+        "no-template-curly-in-string": "error",
+        "no-alert": "error",
+        "no-debugger": "error",
+        "no-empty-function": "error",
+        "vars-on-top": "error",
+        "no-case-declarations": "off",
+        "linebreak-style": [
+            "off",
+            "windows"
+        ]
+    }
+}

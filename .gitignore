@@ -1,0 +1,11 @@
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+**/node_modules
+
+backend/.env
+
+ui/.env
