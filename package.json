@@ -1,0 +1,27 @@
+{
+  "name": "chatgpt-chatbot",
+  "version": "0.0.1",
+  "description": "Starter and helper scripts for chatgpt chatbot app",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "sh start.sh",
+    "start-app": "concurrently -n backend,ui -c auto,magenta \"cd backend && npm run dev\" \"cd ui && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:galethil/chatgpt-chatbot.git"
+  },
+  "keywords": [
+    "starter",
+    "helper",
+    "scripts"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  }
+}
