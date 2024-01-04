@@ -34,7 +34,9 @@ const Chat = () => {
     setIsLoading(true);
 
     axios
-      .post('http://localhost:4500/prompt')
+      .post('http://localhost:4500/prompt', {
+        message,
+      })
       .then(function (response) {
         // handle success
         console.log(response);
@@ -42,7 +44,7 @@ const Chat = () => {
         setChats((ch) => [
           ...ch,
           {
-            message: response.data,
+            message: typeof response.data === 'string' ? response.data : JSON.stringify(response.data),
             time: `${now.getHours()}:${now.getMinutes()}`,
             isMessageFromMe: false,
           },
@@ -85,6 +87,7 @@ const Chat = () => {
           <List>
             {chats.map((chat, index) => (
               <ChatBubble
+                key={index}
                 message={chat.message}
                 time={chat.time}
                 uniqueKey={index}
