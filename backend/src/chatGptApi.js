@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { OPENAI_API_KEY, DEBUG } = require('../config');
+const { getLatestConversation } = require('./conversationStore');
 
 /**
  * @docs https://platform.openai.com/docs/quickstart?context=curl
@@ -34,6 +35,10 @@ async function request(messages, temperature = 0.4, maxTokens = 500) {
   } catch (error) {
     console.error('Error sending request to API:', error);
   }
+}
+
+async function requestWithHistory(messages, sessionId, temperature, maxTokens) {
+  return request([...getLatestConversation(sessionId), ...messages], temperature, maxTokens);
 }
 
 /**
@@ -99,5 +104,6 @@ async function moderation(message) {
 
 module.exports = {
   request,
+  requestWithHistory,
   moderation
 };

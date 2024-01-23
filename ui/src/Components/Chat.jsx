@@ -59,7 +59,7 @@ const Chat = () => {
           },
           {
             headers: {
-              sessionId: uuid,
+              sessionid: uuid,
             },
           },
         )
@@ -70,7 +70,10 @@ const Chat = () => {
           setChats((ch) => [
             ...ch,
             {
-              message: typeof response.data === 'string' ? response.data : JSON.stringify(response.data),
+              message:
+                typeof response.data === 'string'
+                  ? response.data
+                  : JSON.stringify(response.data),
               time: `${now.getHours()}:${now.getMinutes()}`,
               isMessageFromMe: false,
             },
@@ -94,7 +97,7 @@ const Chat = () => {
           setIsLoading(false);
         });
     },
-    [chats],
+    [chats, uuid],
   );
 
   const addMyMessage = () => {

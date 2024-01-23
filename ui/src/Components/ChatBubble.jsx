@@ -9,7 +9,7 @@ const ChatBubble = ({ message, time, uniqueKey, isMessageFromMe = false }) => {
     <ListItem key={uniqueKey}>
       <Grid container>
         <Grid item xs={12}>
-          <ListItemText align={align} primary={message}></ListItemText>
+          <ListItemText align={align} primary={message} style={{ whiteSpace: 'pre-wrap' }}></ListItemText>
         </Grid>
         <Grid item xs={12}>
           <ListItemText align={align} secondary={time}></ListItemText>

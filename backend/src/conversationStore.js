@@ -19,7 +19,10 @@ const initConversation = (conversationId) => {
  * @param {('system'|'user'|'assistant')} role
  */
 const addMessage = (conversationId, message, role = 'assistant') => {
-  if (!conversationId || !message) throw Error('conversationId, message are required');
+  if (!conversationId || !message) {
+    console.error('"conversationId" and "message" are required', conversationId, message, role);
+    throw Error('"conversationId" and "message" are required');
+  }
 
   initConversation(conversationId);
 
@@ -30,13 +33,17 @@ const addMessage = (conversationId, message, role = 'assistant') => {
 const getConversation = (conversationId) => store[conversationId].conversation;
 
 const getLatestConversation = (conversationId) => {
+  if (!store[conversationId]) {
+    return [];
+  }
+
   // Check if the array has at least three elements
-  if (store[conversationId].conversation.length < 3) {
+  if (store[conversationId].conversation.length < 6) {
     return store[conversationId].conversation; // Return the entire array if it has less than three elements
   }
 
   // Use slice to get the last three items
-  return store[conversationId].conversation.slice(-3);
+  return store[conversationId].conversation.slice(-6);
 };
 
 const saveAttribute = (conversationId, attributeId, attributeValue) => {
@@ -48,3 +55,10 @@ const saveAttribute = (conversationId, attributeId, attributeValue) => {
 };
 
 const getAttribute = (conversationId, attributeId) => store[conversationId].attributes[attributeId];
+
+module.exports = {
+  addMessage,
+  getLatestConversation,
+  getAttribute,
+  saveAttribute
+};
