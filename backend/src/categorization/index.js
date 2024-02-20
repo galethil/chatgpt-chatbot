@@ -9,7 +9,7 @@ const categorizePrompt = async (cleanedUserMessage, sessionId) => {
     { role: 'system', content: categorizationPrompt(lastCategory) },
     { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
   ];
-  const categorizationOutput = await requestWithHistory(categorizationMessages, sessionId);
+  const categorizationOutput = await requestWithHistory(categorizationMessages, sessionId, 1);
 
   // process prompt based on category
   let categorization;

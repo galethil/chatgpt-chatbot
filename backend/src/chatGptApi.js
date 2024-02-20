@@ -37,8 +37,8 @@ async function request(messages, temperature = 0.4, maxTokens = 500) {
   }
 }
 
-async function requestWithHistory(messages, sessionId, temperature, maxTokens) {
-  return request([...getLatestConversation(sessionId), ...messages], temperature, maxTokens);
+async function requestWithHistory(messages, sessionId, messageCount, temperature, maxTokens) {
+  return request([messages[0], ...getLatestConversation(sessionId, messageCount), messages[1]], temperature, maxTokens);
 }
 
 /**

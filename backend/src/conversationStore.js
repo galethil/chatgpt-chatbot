@@ -32,18 +32,18 @@ const addMessage = (conversationId, message, role = 'assistant') => {
 
 const getConversation = (conversationId) => store[conversationId].conversation;
 
-const getLatestConversation = (conversationId) => {
+const getLatestConversation = (conversationId, messageCount = 6) => {
   if (!store[conversationId]) {
     return [];
   }
 
   // Check if the array has at least three elements
-  if (store[conversationId].conversation.length < 6) {
+  if (store[conversationId].conversation.length < messageCount) {
     return store[conversationId].conversation; // Return the entire array if it has less than three elements
   }
 
   // Use slice to get the last three items
-  return store[conversationId].conversation.slice(-6);
+  return store[conversationId].conversation.slice(-messageCount);
 };
 
 const saveAttribute = (conversationId, attributeId, attributeValue) => {
@@ -54,7 +54,7 @@ const saveAttribute = (conversationId, attributeId, attributeValue) => {
   store[conversationId].attributes[attributeId] = attributeValue;
 };
 
-const getAttribute = (conversationId, attributeId) => store[conversationId].attributes[attributeId];
+const getAttribute = (conversationId, attributeId) => store[conversationId]?.attributes?.[attributeId];
 
 module.exports = {
   addMessage,

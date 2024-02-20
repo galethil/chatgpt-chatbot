@@ -50,7 +50,7 @@ const prompt = async (message, sessionId) => {
   // Get outputs of specific category of prompt
   if (categorization.primary === 'General Inquiry' && categorization.secondary === 'Shipping') {
     input = shippingPrompt;
-    output = await shipping(cleanedUserMessage);
+    output = await shipping(cleanedUserMessage, sessionId);
   } else if (categorization.secondary === 'Product information') {
     output = await productInformation(cleanedUserMessage);
   } else if (categorization.primary === 'Error') {

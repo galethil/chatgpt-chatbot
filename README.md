@@ -1,5 +1,9 @@
 # chatgpt-chatbot
 
+## Start your local environment
+
+1. Run `sh start.sh` in root folder
+
 ## Course content
 
 1. **Sending prompts to ChatGPT API**<br>

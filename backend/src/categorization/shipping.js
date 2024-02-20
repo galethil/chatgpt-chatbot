@@ -1,9 +1,8 @@
-const { request } = require("../chatGptApi");
-const { delimiter } = require("../constants");
-const { generalPrompt, shippingPrompt } = require("../prompts");
+const { requestWithHistory } = require('../chatGptApi');
+const { delimiter } = require('../constants');
+const { generalPrompt, shippingPrompt } = require('../prompts');
 
-
-const shipping = async (cleanedUserMessage) => {
+const shipping = async (cleanedUserMessage, sessionId) => {
   const messages = [
     {
       role: 'system',
@@ -12,7 +11,7 @@ ${shippingPrompt}`
     },
     { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
   ];
-  return await request(messages);
-}
+  return await requestWithHistory(messages, sessionId);
+};
 
 module.exports = shipping;
