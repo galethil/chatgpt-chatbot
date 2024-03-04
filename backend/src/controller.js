@@ -2,15 +2,12 @@ const { request, moderation } = require('./chatGptApi');
 const {
   delimiter,
   moderationFailMessage,
-  outputModerationFailMessage,
   delimiterBackTick,
   failMessage
 } = require('./constants');
 const {
   inputModerationPrompt,
   shippingPrompt,
-  outputValidationPrompt,
-  outputValidationQAPrompt
 } = require('./prompts');
 const { ENABLE_INPUT_MODERATION, ENABLE_OUTPUT_MODERATION, ENABLE_OUTPUT_VALIDATION } = require('../config');
 const shipping = require('./categorization/shipping');
@@ -43,39 +40,15 @@ const prompt = async (message, sessionId) => {
   let input = '';
   // categorize user prompt
   const categorization = await categorizePrompt(cleanedUserMessage, sessionId);
-  console.log('Categorization result', categorization);
 
   // Get outputs of specific category of prompt
   if (categorization.primary === 'General Inquiry' && categorization.secondary === 'Shipping') {
     input = shippingPrompt;
     output = await shipping(cleanedUserMessage, sessionId);
-  } else if (
-    categorization.primary === 'Account Management' &&
-    categorization.secondary === 'Update personal information'
-  ) {
   } else if (categorization.primary === 'Error') {
     return failMessage;
   } else {
     return `Answering category (primary: ${categorization.primary}, secondary: ${categorization.secondary}) not implemented.`;
-  }
-
-  // moderation check for output
-  if (ENABLE_OUTPUT_MODERATION) {
-    const outputModerationResult = await moderation(output);
-    if (outputModerationResult.flagged) {
-      return outputModerationFailMessage;
-    }
-  }
-  // validation check for output
-  if (ENABLE_OUTPUT_VALIDATION) {
-    const outputValidationMessages = [
-      { role: 'system', content: outputValidationPrompt },
-      { role: 'user', content: outputValidationQAPrompt(cleanedUserMessage, input, output) }
-    ];
-    const outputValidationOutput = await request(outputValidationMessages);
-    if (outputValidationOutput !== 'Y') {
-      output = `${output} If we were not able to fulfill your request fully, feel free to contact out support department here...`;
-    }
   }
 
 
