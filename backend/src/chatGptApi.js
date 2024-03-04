@@ -37,10 +37,6 @@ async function request(messages, temperature = 0.4, maxTokens = 500) {
   }
 }
 
-async function requestWithHistory(messages, sessionId, messageCount, temperature, maxTokens) {
-  return request([messages[0], ...getLatestConversation(sessionId, messageCount), messages[1]], temperature, maxTokens);
-}
-
 /**
  * @docs https://platform.openai.com/docs/guides/moderation/quickstart
  * @description The value for category_scores is between 0 and 1
@@ -104,6 +100,5 @@ async function moderation(message) {
 
 module.exports = {
   request,
-  requestWithHistory,
   moderation
 };

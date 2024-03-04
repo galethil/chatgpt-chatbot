@@ -1,4 +1,4 @@
-const { requestWithHistory } = require('../chatGptApi');
+const { request } = require('../chatGptApi');
 const { delimiter } = require('../constants');
 const { getAttribute, saveAttribute } = require('../conversationStore');
 const { categorizationPrompt } = require('../prompts');
@@ -9,7 +9,7 @@ const categorizePrompt = async (cleanedUserMessage, sessionId) => {
     { role: 'system', content: categorizationPrompt(lastCategory) },
     { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
   ];
-  const categorizationOutput = await requestWithHistory(categorizationMessages, sessionId, 1);
+  const categorizationOutput = await request(categorizationMessages);
 
   // process prompt based on category
   let categorization;

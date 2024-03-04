@@ -15,8 +15,6 @@ const {
 const { ENABLE_INPUT_MODERATION, ENABLE_OUTPUT_MODERATION, ENABLE_OUTPUT_VALIDATION } = require('../config');
 const shipping = require('./categorization/shipping');
 const categorizePrompt = require('./categorization');
-const { addMessage } = require('./conversationStore');
-const updatePersonalInformation = require('./categorization/updatePersonalInformation');
 
 const prompt = async (message, sessionId) => {
   // moderation replacement of delimiters
@@ -80,9 +78,6 @@ const prompt = async (message, sessionId) => {
     }
   }
 
-  // add output to history
-  addMessage(sessionId, cleanedUserMessage, 'user');
-  addMessage(sessionId, output, 'assistant');
 
   return output;
 };
