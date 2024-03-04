@@ -11,13 +11,6 @@ const categorizePrompt = async (cleanedUserMessage, sessionId) => {
   ];
   const categorizationOutput = await requestWithHistory(categorizationMessages, sessionId, 1);
 
-  // check if we are expecting special request from user
-  const userRequestType = getAttribute(sessionId, 'userRequestType');
-  saveAttribute(sessionId, 'userRequestType', null);
-  if (userRequestType) {
-    return { primary: 'User request', secondary: userRequestType };
-  }
-
   // process prompt based on category
   let categorization;
 

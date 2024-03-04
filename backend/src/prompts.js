@@ -122,7 +122,6 @@ Provide your output only as a number of category from 1 to 4.
 4. Other
 `;
 
-const productNamePrompt = `You will be provided with customer service query. The customer service query will be delimited with ${delimiter} characters. Extract just name of the product from the query and output only the product name.`;
 
 module.exports = {
   categorizationPrompt,
