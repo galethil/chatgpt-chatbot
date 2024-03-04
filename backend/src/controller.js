@@ -12,10 +12,6 @@ const prompt = async (message) => {
     return 'Your request is too long. Try shorter request or contact out support.';
   }
   if (ENABLE_INPUT_MODERATION) {
-    const moderationResult = await moderation(cleanedUserMessage);
-    if (moderationResult.flagged) {
-      return moderationFailMessage;
-    }
     const moderationMessages = [
       { role: 'system', content: inputModerationPrompt },
       { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
