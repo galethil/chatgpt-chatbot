@@ -53,7 +53,7 @@ const prompt = async (message, sessionId) => {
     input = shippingPrompt;
     output = await shipping(cleanedUserMessage, sessionId);
   } else if (categorization.secondary === 'Product information') {
-    output = await productInformation(cleanedUserMessage, sessionId);
+    output = await productInformation(cleanedUserMessage);
   } else if (
     categorization.primary === 'Account Management' &&
     categorization.secondary === 'Update personal information'
