@@ -47,8 +47,10 @@ const getLatestConversation = (conversationId, messageCount = 6) => {
 };
 
 const saveAttribute = (conversationId, attributeId, attributeValue) => {
-  if (!conversationId || !attributeId || !attributeValue)
-    throw Error('conversationId, attributeId, attributeValue are required');
+  if (!conversationId || !attributeId) {
+    console.log('saveAttribute', conversationId, attributeId, attributeValue);
+    throw Error('conversationId, attributeId are required');
+  }
 
   initConversation(conversationId);
   store[conversationId].attributes[attributeId] = attributeValue;

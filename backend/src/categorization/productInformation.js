@@ -1,8 +1,9 @@
 const { request } = require('../chatGptApi');
 const { delimiter } = require('../constants');
-const { categorizationProductInformationPrompt } = require('../prompts');
+const { saveAttribute } = require('../conversationStore');
+const { categorizationProductInformationPrompt, productNamePrompt } = require('../prompts');
 
-const productInformation = async (cleanedUserMessage) => {
+const productInformation = async (cleanedUserMessage, sessionId) => {
   const productInfoCategorizationMessages = [
     {
       role: 'system',
@@ -13,7 +14,24 @@ const productInformation = async (cleanedUserMessage) => {
   productInfoCategorizationOutput = await request(productInfoCategorizationMessages);
 
   if (productInfoCategorizationOutput === '1') {
-    return 'Query DB for the product specific info.';
+    const productNameMessages = [
+      {
+        role: 'system',
+        content: productNamePrompt
+      },
+      { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
+    ];
+    const productName = await request(productNameMessages);
+
+    // search for product name in DB
+    const productDbID = 5;
+
+    if (productDbID) {
+      return 'Query DB for the product specific info.';
+    } else {
+      saveAttribute(sessionId, 'userRequestType', 'product-name-product-info');
+      return 'Product was not found based on your question. Please provide just product ID or link to the product.';
+    }
   } else if (productInfoCategorizationOutput === '2') {
     return 'Query DB for the cheapest product.';
   } else if (productInfoCategorizationOutput === '3') {

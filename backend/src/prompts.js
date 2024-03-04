@@ -112,6 +112,18 @@ Name: Click & Collect
 Price: Free
 Conditions: In-Store Pickup. Customers can order online and pick up their items at a nearby store. Ready for pickup within 1-2 business days. Confirmation email sent upon availability.`;
 
+const updatePersonalInformationPrompt = `You will be provided with customer service queries. The customer service query will be delimited with ${delimiter} characters.
+Classify query into a category. 
+Provide your output only as a number of category from 1 to 4.
+
+1. Request to update email address.
+2. Request to update phone number.
+3. Request to update postal address.
+4. Other
+`;
+
+const productNamePrompt = `You will be provided with customer service query. The customer service query will be delimited with ${delimiter} characters. Extract just name of the product from the query and output only the product name.`;
+
 module.exports = {
   categorizationPrompt,
   categorizationProductInformationPrompt,
@@ -120,5 +132,7 @@ module.exports = {
   outputValidationPrompt,
   outputValidationQAPrompt,
   productNamesExtractionPrompt,
-  shippingPrompt
+  productNamePrompt,
+  shippingPrompt,
+  updatePersonalInformationPrompt
 };
