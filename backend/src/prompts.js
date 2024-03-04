@@ -2,11 +2,7 @@ const { delimiter } = require('./constants');
 
 const generalPrompt = `You are an assistant that should answer the customer queries helpfully and politely.`;
 
-const categorizationPrompt = (previousCategorisation) => `You will be provided with customer service queries. ${
-  previousCategorisation
-    ? `Previous query was categorise as \`{"primary": "${previousCategorisation.primary}", "secondary": "${previousCategorisation.secondary}"}\`.`
-    : ''
-}The customer service query will be delimited with ${delimiter} characters.
+const categorizationPrompt = `You will be provided with customer service queries. The customer service query will be delimited with ${delimiter} characters.
 Classify each query into a primary category and a secondary category. 
 Provide your output in json format with the keys: primary and secondary.
 

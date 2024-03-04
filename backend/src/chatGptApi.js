@@ -1,6 +1,5 @@
 const axios = require('axios');
 const { OPENAI_API_KEY, DEBUG } = require('../config');
-const { getLatestConversation } = require('./conversationStore');
 
 /**
  * @docs https://platform.openai.com/docs/quickstart?context=curl
@@ -36,7 +35,6 @@ async function request(messages, temperature = 0.4, maxTokens = 500) {
     console.error('Error sending request to API:', error);
   }
 }
-
 
 module.exports = {
   request
