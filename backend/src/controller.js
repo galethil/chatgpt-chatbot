@@ -1,13 +1,6 @@
 const { request, moderation } = require('./chatGptApi');
-const {
-  delimiter,
-  moderationFailMessage,
-  delimiterBackTick,
-  failMessage
-} = require('./constants');
-const {
-  inputModerationPrompt,
-} = require('./prompts');
+const { delimiter, moderationFailMessage, delimiterBackTick } = require('./constants');
+const { inputModerationPrompt } = require('./prompts');
 const { ENABLE_INPUT_MODERATION } = require('../config');
 
 const prompt = async (message) => {
@@ -38,7 +31,6 @@ const prompt = async (message) => {
     { role: 'user', content: `${delimiter}${cleanedUserMessage}${delimiter}` }
   ];
   const output = await request(messages);
-
 
   return output;
 };
