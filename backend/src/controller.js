@@ -14,7 +14,6 @@ const {
 } = require('./prompts');
 const { ENABLE_INPUT_MODERATION, ENABLE_OUTPUT_MODERATION, ENABLE_OUTPUT_VALIDATION } = require('../config');
 const shipping = require('./categorization/shipping');
-const productInformation = require('./categorization/productInformation');
 const categorizePrompt = require('./categorization');
 const { addMessage } = require('./conversationStore');
 const updatePersonalInformation = require('./categorization/updatePersonalInformation');
@@ -52,21 +51,10 @@ const prompt = async (message, sessionId) => {
   if (categorization.primary === 'General Inquiry' && categorization.secondary === 'Shipping') {
     input = shippingPrompt;
     output = await shipping(cleanedUserMessage, sessionId);
-  } else if (categorization.secondary === 'Product information') {
-    output = await productInformation(cleanedUserMessage);
   } else if (
     categorization.primary === 'Account Management' &&
     categorization.secondary === 'Update personal information'
   ) {
-    output = await updatePersonalInformation(cleanedUserMessage, sessionId);
-  } else if (categorization.primary === 'User request') {
-    if (categorization.secondary === 'email-change') {
-      // update email
-      return 'Email was updated';
-    } else if (categorization.secondary === 'phone-change') {
-      // update phone
-      return 'Phone number was updated';
-    }
   } else if (categorization.primary === 'Error') {
     return failMessage;
   } else {
