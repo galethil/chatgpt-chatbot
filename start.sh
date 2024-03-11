@@ -25,12 +25,6 @@ if [ ! -f .env ]; then
 fi
 cd ..
 
-# verify if docker is working
-if docker ps | tr -d '\n' | grep -Evq 'CONTAINER|mongo'; then
-  echo "Docker is probably not running"
-  exit 1
-fi
-
 echo "App is starting..."
 
 npm run start-app
