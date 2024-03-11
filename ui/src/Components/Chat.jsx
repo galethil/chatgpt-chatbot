@@ -70,10 +70,7 @@ const Chat = () => {
           setChats((ch) => [
             ...ch,
             {
-              message:
-                typeof response.data === 'string'
-                  ? response.data
-                  : JSON.stringify(response.data),
+              message: typeof response.data === 'string' ? response.data : JSON.stringify(response.data),
               time: `${now.getHours()}:${now.getMinutes()}`,
               isMessageFromMe: false,
             },
@@ -116,6 +113,12 @@ const Chat = () => {
     setMessage(event.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      addMyMessage();
+    }
+  };
+
   return (
     <div>
       <Grid container>
@@ -152,6 +155,7 @@ const Chat = () => {
                   label="Type Something"
                   value={message}
                   onChange={onMessageChange}
+                  onKeyDown={handleKeyDown}
                   fullWidth
                 />
               </Grid>
