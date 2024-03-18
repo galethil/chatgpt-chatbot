@@ -113,6 +113,8 @@ Based on provided information answer truthfully and helpfully the user query:
 2.3. User input
 > What types of shipping do you provide?
 
+**Problem with this aproach is limited size of prompt.**
+
 ## 2. Chaining prompts
 
 Standard coding experience
