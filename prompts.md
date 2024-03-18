@@ -4,7 +4,7 @@
 
 Your task is to write a system prompt + add user input to it. After submitting to ChatGPT you have to get the expected output.
 
-## 1. Working with user input
+## 0. Working with user input
 
 Task:
 Find capital city of given country.
@@ -22,7 +22,7 @@ Expected output:
 `Washington D.C.`
 
 
-## 2. One-prompt-do-all concept
+## 1. One-prompt-do-all concept
 
 When I started I thought that you can put everything as prefix to user input.
 
@@ -112,6 +112,44 @@ Based on provided information answer truthfully and helpfully the user query:
 
 2.3. User input
 > What types of shipping do you provide?
+
+## 2. Chaining prompts
+
+Standard coding experience
+
+```javascript
+if (userInputCategory == “shipping”) {
+    return “We offer 4 types of shipping …”
+} else if (userInputCategory == “productDetail”) {
+   const result = sql(“SELECT * FROM products WHERE id = …”)
+   …
+}
+```
+
+ChatGPT experience
+```javascript
+const userInputCategory = ???
+```
+
+```
+Me: Tell me what is the user input category?
+
+ChatGPT: Certainly, it is my pleasure to inform you about the user input category.
+I believe that the category is “Question about shipping and it’s details”.
+I’m here to serve you.
+```
+
+Result is not useful
+
+```javascript
+const userInputCategory = 'Certainly, it is my pleasure to inform you about the user input category.\nI believe that the category is “Question about shipping and it’s details”. I’m here to serve you.'
+
+if (userInputCategory == “shipping”) {
+    return “We offer 4 types of shipping …”
+}
+```
+
+Solution is to chain prompts. 
 
 
 ## 3. Extract data from user input
