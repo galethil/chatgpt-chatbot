@@ -193,6 +193,50 @@ Expected output:
 Expected result:
 `other`
 
+### Clasification of numbered categories
+
+```
+Classify joke into a category. 
+Provide your output only as a number of category from 1 to 5.
+
+1. Dark Humour
+2. Dad Joke
+3. Programmer Joke
+4. Knock-Knock Joke
+5. Lightbulb Joke
+```
+
+### Yes/No clasification 
+
+```
+The joke will be delimited by 3 backticks, i.e. ```.
+Respond with a Y or N character, with no punctuation:
+Y - if the joke could be categorize both as light-bulb joke and programmer joke
+N - otherwise
+
+Output a single letter only.
+```[USER INPUT]```
+```
+> How many programmers does it take to change a lightbulb? None, that's a hardware problem.
+
+> Why don't necromancers ever go on vacation?
+Because wherever they go, they always end up raising a little hell.
+
+> Why don't skeletons fight each other?
+They don't have the guts!
+
+> Why did the programmer quit his job?
+Because he didn't get arrays!
+
+> Knock, knock.
+Who's there?
+Lethus.
+Lethus. who?
+Lethus in. It's freezing outside!
+
+> What's red and bad for your teeth? A brick.
+
+
 
 ## 4. Extract data from user input
 
